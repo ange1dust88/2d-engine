@@ -1,0 +1,12 @@
+{
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.associations": {
+        "iostream": "cpp",
+        "fstream": "cpp",
+        "vector": "cpp",
+        "*.tcc": "cpp",
+        "atomic": "cpp",
+        "ios": "cpp",
+        "xiosbase": "cpp"
+    }
+}

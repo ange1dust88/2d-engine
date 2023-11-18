@@ -1,0 +1,10 @@
+^C:\USERS\LEV\DESKTOP\CODE\BUILD\CMAKEFILES\3E0494FDA513A543C82DEE3AFEAA7EE7\GENERATE.STAMP.RULE
+setlocal
+C:\mingw64\bin\cmake.exe -SC:/Users/Lev/Desktop/code -BC:/Users/Lev/Desktop/code/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/Lev/Desktop/code/build/code.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
