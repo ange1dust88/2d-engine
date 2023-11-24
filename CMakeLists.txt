@@ -11,6 +11,8 @@ set(SOURCES
     Player.cpp
     Animation.cpp
     Collider.cpp
+    Platform.cpp
+
 
     #Platform.cpp# Добавьте ваш файл реализации
 )
@@ -22,6 +24,9 @@ set(HEADERS
     Player.h
     Animation.h
     Collider.h
+    Platform.h
+
+   
     
     
     # Добавьте ваш заголовочный файл

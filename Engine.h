@@ -3,6 +3,7 @@
 #include "PrimitiveRenderer.h"
 #include "Animation.h"
 #include <fstream>
+#include "Platform.h"
 #ifndef ENGINE_H
 #define ENGINE_H
 
@@ -17,6 +18,7 @@ public:
     void closeGame();
     void drawToBuffer();
     void swapBuffers();
+    
 
 private:
     unsigned int fps;
@@ -28,6 +30,8 @@ private:
     sf::RenderTexture buffer2;  
     sf::Sprite displaySprite;   
     bool useFirstBuffer;  
+    bool isFullscreen;
+    
     PrimitiveRenderer primitiveRenderer;  
 };
 

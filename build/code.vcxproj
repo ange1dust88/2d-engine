@@ -328,12 +328,14 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Users\Lev\Desktop\code\Player.cpp" />
     <ClCompile Include="C:\Users\Lev\Desktop\code\Animation.cpp" />
     <ClCompile Include="C:\Users\Lev\Desktop\code\Collider.cpp" />
+    <ClCompile Include="C:\Users\Lev\Desktop\code\Platform.cpp" />
     <ClInclude Include="C:\Users\Lev\Desktop\code\Engine.h" />
     <ClInclude Include="C:\Users\Lev\Desktop\code\PrimitiveRenderer.h" />
     <ClInclude Include="C:\Users\Lev\Desktop\code\Point2D.h" />
     <ClInclude Include="C:\Users\Lev\Desktop\code\Player.h" />
     <ClInclude Include="C:\Users\Lev\Desktop\code\Animation.h" />
     <ClInclude Include="C:\Users\Lev\Desktop\code\Collider.h" />
+    <ClInclude Include="C:\Users\Lev\Desktop\code\Platform.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="C:\Users\Lev\Desktop\code\build\ZERO_CHECK.vcxproj">

@@ -61,34 +61,10 @@ void PrimitiveRenderer::drawLine(sf::Vector2f p1, sf::Vector2f p2, sf::Color col
 }
 
 
-void PrimitiveRenderer::drawCircleSym(sf::Vector2f center, float radius, sf::Color color) {
-    float x, y;
-    int numSegments = 100;  // Adjust the number of segments as needed for a smoother circle
-
-    for (int i = 0; i < numSegments; ++i) {
-        float alpha = static_cast<float>(i) / static_cast<float>(numSegments - 1) * pi / 2.0f;
-
-        // Calculate coordinates using the circle equation
-        x = radius * cos(alpha);
-        y = radius * sin(alpha);
-
-        // Draw points in the right bottom quarter
-        Point2D(window, sf::Vector2i(static_cast<int>(center.x + x), static_cast<int>(center.y + y))).setPixel(color);
-
-        // Draw points in the right upper quarter
-        Point2D(window, sf::Vector2i(static_cast<int>(center.x + x), static_cast<int>(center.y - y))).setPixel(color);
-
-        // Draw points in the left bottom quarter
-        Point2D(window, sf::Vector2i(static_cast<int>(center.x - x), static_cast<int>(center.y + y))).setPixel(color);
-
-        // Draw points in the left upper quarter
-        Point2D(window, sf::Vector2i(static_cast<int>(center.x - x), static_cast<int>(center.y - y))).setPixel(color);
-    }
-}
 
 
 void PrimitiveRenderer::drawEllipse(sf::Vector2f center, float radiusX, float radiusY, sf::Color color) {
-    const int numSegments = 100; // Adjust the number of segments as needed
+    const int numSegments = 100; 
     const float twoPi = 2.0 * pi;
 
     float angleIncrement = twoPi / numSegments;
@@ -98,7 +74,7 @@ void PrimitiveRenderer::drawEllipse(sf::Vector2f center, float radiusX, float ra
         float x = center.x + radiusX * cos(angle);
         float y = center.y + radiusY * sin(angle);
 
-        // Draw the point
+   
         sf::Vertex vertex(sf::Vector2f(x, y), color);
         window->draw(&vertex, 1, sf::Points);
     }
@@ -123,5 +99,4 @@ void PrimitiveRenderer::drawPolygon(const std::vector<sf::Vector2f>& points, sf:
     };
     window->draw(closingLine, 2, sf::Lines);
 }
-
 

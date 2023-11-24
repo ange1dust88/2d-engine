@@ -1,7 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Point2D.h"
-#include "Collider.h"
 #ifndef PRIMITIVERENDERER_H
 #define PRIMITIVERENDERER_H
 
@@ -22,7 +21,6 @@ public:
     void drawCircleSym(sf::Vector2f center, float radius, sf::Color color);
     void drawEllipse(sf::Vector2f center, float radiusX, float radiusY, sf::Color color);
     void drawPolygon(const std::vector<sf::Vector2f>& points, sf::Color color);
-
 
 
     

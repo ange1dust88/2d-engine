@@ -21,15 +21,26 @@ Engine::~Engine() {
 //main game loop using a timer
 
 void Engine::run() {
-    bool magenta = true;
-    sf::Texture playerTexture;
+    //player
+    sf::Texture playerTexture; 
+    playerTexture.loadFromFile("C:/Users/Lev/Desktop/code/build/Debug/tux.png");
+    Player player(&playerTexture, sf::Vector2f(3, 9), 0.3f, 100.0f);
 
+    //borders
+  Platform border1(nullptr, sf::Vector2f(1600.0f, 0.f), sf::Vector2f(0.0f, 0.0f), sf::Color::Magenta);
+  Platform border2(nullptr, sf::Vector2f(0.0f, 1200.f), sf::Vector2f(800.0f, 0.0f), sf::Color::Magenta);
+  Platform border3(nullptr, sf::Vector2f(0.0f, 1200.f), sf::Vector2f(0.0f, 600.0f), sf::Color::Magenta);
+  Platform border4(nullptr, sf::Vector2f(1600.0f, 0.f), sf::Vector2f(800.0f, 600.0f), sf::Color::Magenta);
 
-    if (!playerTexture.loadFromFile("C:/Users/Lev/Desktop/code/build/Debug/tux.png")) {
-        logError("Failed to load player texture!");
-        return;
-    }
-    Player player(&playerTexture, sf::Vector2f(3, 9), 0.1f, 100.0f);
+   //platforms
+    Platform platform1(nullptr, sf::Vector2f(100.0f, 100.f), sf::Vector2f(100.0f, 100.0f), sf::Color(173, 216, 230));
+    Platform platform2(nullptr, sf::Vector2f(100.0f, 100.f), sf::Vector2f(700.0f, 100.0f), sf::Color(255, 182, 193));
+    Platform platform3(nullptr, sf::Vector2f(100.0f, 100.f), sf::Vector2f(100.0f, 300.0f), sf::Color(144, 238, 144));
+    Platform platform4(nullptr, sf::Vector2f(100.0f, 100.f), sf::Vector2f(700.0f, 300.0f), sf::Color(230, 230, 250));
+
+//sf::Color(173, 216, 230)); sf::Color(255, 182, 193)); sf::Color(144, 238, 144));  sf::Color(230, 230, 250));
+
+    //timer
     float deltaTime = 0.0f;
     sf::Clock timer;
 
@@ -44,41 +55,46 @@ void Engine::run() {
             if (evnt.type == sf::Event::KeyPressed && evnt.key.code == sf::Keyboard::Enter) {
                 close();
             }
+
+            
         }
 
         // Clear the screen at the beginning of each frame
-        clear(sf::Color::Black);  // Use the desired background color
+        clear(sf::Color(245, 245, 220)); 
 
-        if (timer.getElapsedTime().asSeconds() >= 2) {
-            timer.restart();
-
-            if (magenta) {
-                
-                magenta = false;
-            } else {
-                
-                magenta = true;
-            }
-        }
-
+        //demo start
         primitiveRenderer.drawCircle(sf::Vector2f(200, 200), 50, sf::Color::Red);
-
-
-        std::vector<sf::Vector2f> polygonPoints = {
-            {200.0f, 200.0f},
-            {350.0f, 100.0f},
-            {400.0f, 300.0f},
-            {150.0f, 150.0f}
-        };
-        sf::Color polygonColor = sf::Color::Blue;
-        primitiveRenderer.drawPolygon(polygonPoints, polygonColor);
 
         player.Update(deltaTime);
         player.Draw(*this);
 
-        // Display the contents of the render window
+        //border collion
+        border1.GetCollider().CheckColision(player.getCollider(), 1.0f);
+        border2.GetCollider().CheckColision(player.getCollider(), 1.0f);
+        border3.GetCollider().CheckColision(player.getCollider(), 1.0f);
+        border4.GetCollider().CheckColision(player.getCollider(), 1.0f);
+        //platform collision
+        platform1.GetCollider().CheckColision(player.getCollider(), 0.0f);
+        platform2.GetCollider().CheckColision(player.getCollider(), 0.4f);
+        platform3.GetCollider().CheckColision(player.getCollider(), 0.8f);
+        platform4.GetCollider().CheckColision(player.getCollider(), 1.0f);
+        //border draw
+        border1.Draw(*this);
+        border2.Draw(*this);
+        border3.Draw(*this);
+        border4.Draw(*this);
+        //platform draw
+        platform1.Draw(*this);
+        platform2.Draw(*this);
+        platform3.Draw(*this);
+        platform4.Draw(*this);
+       
+        //demo end
+
+
         display();
     }
+    
 }
 
 
@@ -100,39 +116,16 @@ void Engine::swapBuffers() {
 }
 
 void Engine::update(sf::Time deltaTime) {
-    // Update game logic based on deltaTime
+    
 }
 
 void Engine::render() {
-    //support for cleaning the screen (and ultimately any bitmap) to a given color
+    
     clear(sf::Color:: White);  
-
-    // Draw game elements
 
     display();  
 }
-void Engine::handleEvents() {
-    sf::Event event;
-    while (pollEvent(event)) {
-        switch (event.type) {
-            //closing the game
-            case sf::Event::Closed:
-                closeGame();
-                break;
-            //keyboard and mouse support
-            case sf::Event::KeyPressed:
-                if (event.key.code == sf::Keyboard::Escape) {
-                    //pause the game, show menu, etc
-                }
-            break;
-            case sf::Event::MouseButtonPressed:
-                if (event.mouseButton.button == sf::Mouse::Left) {
-                    //perform an action
-                }
-            break;
-        }
-    }
-}
+
 //parameterizing the graphic mode
 void Engine::setFullScreen(bool isFullScreen) {
     if (isFullScreen) {
