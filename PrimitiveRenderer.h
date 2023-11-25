@@ -21,6 +21,7 @@ public:
     void drawCircleSym(sf::Vector2f center, float radius, sf::Color color);
     void drawEllipse(sf::Vector2f center, float radiusX, float radiusY, sf::Color color);
     void drawPolygon(const std::vector<sf::Vector2f>& points, sf::Color color);
+    void animatedCircle(sf::Vector2f center, float initialRadius, float maxRadius, float animationSpeed, sf::Color color);
 
 
     

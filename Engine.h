@@ -4,6 +4,7 @@
 #include "Animation.h"
 #include <fstream>
 #include "Platform.h"
+
 #ifndef ENGINE_H
 #define ENGINE_H
 
@@ -31,6 +32,7 @@ private:
     sf::Sprite displaySprite;   
     bool useFirstBuffer;  
     bool isFullscreen;
+    sf::Color bcolor;
     
     PrimitiveRenderer primitiveRenderer;  
 };

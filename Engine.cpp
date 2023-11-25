@@ -33,16 +33,19 @@ void Engine::run() {
   Platform border4(nullptr, sf::Vector2f(1600.0f, 0.f), sf::Vector2f(800.0f, 600.0f), sf::Color::Magenta);
 
    //platforms
-    Platform platform1(nullptr, sf::Vector2f(100.0f, 100.f), sf::Vector2f(100.0f, 100.0f), sf::Color(173, 216, 230));
-    Platform platform2(nullptr, sf::Vector2f(100.0f, 100.f), sf::Vector2f(700.0f, 100.0f), sf::Color(255, 182, 193));
-    Platform platform3(nullptr, sf::Vector2f(100.0f, 100.f), sf::Vector2f(100.0f, 300.0f), sf::Color(144, 238, 144));
-    Platform platform4(nullptr, sf::Vector2f(100.0f, 100.f), sf::Vector2f(700.0f, 300.0f), sf::Color(230, 230, 250));
+    Platform platform1(nullptr, sf::Vector2f(100.0f, 100.f), sf::Vector2f(100.0f, 500.0f), sf::Color(173, 216, 230));
+    Platform platform2(nullptr, sf::Vector2f(100.0f, 100.f), sf::Vector2f(300.0f, 500.0f), sf::Color(255, 182, 193));
+    Platform platform3(nullptr, sf::Vector2f(100.0f, 100.f), sf::Vector2f(500.0f, 500.0f), sf::Color(144, 238, 144));
+    Platform platform4(nullptr, sf::Vector2f(100.0f, 100.f), sf::Vector2f(700.0f, 500.0f), sf::Color(230, 230, 250));
 
 //sf::Color(173, 216, 230)); sf::Color(255, 182, 193)); sf::Color(144, 238, 144));  sf::Color(230, 230, 250));
 
     //timer
     float deltaTime = 0.0f;
     sf::Clock timer;
+    sf::Clock backgroundTimer;
+    bcolor = sf::Color(220, 220, 220);
+
 
     while (isOpen()) {
         deltaTime = timer.restart().asSeconds();
@@ -58,15 +61,37 @@ void Engine::run() {
 
             
         }
+        if (backgroundTimer.getElapsedTime().asSeconds() >= 3)
+        {
+            backgroundTimer.restart();
+            bcolor = sf::Color(rand() % 128 + 128, rand() % 128 + 128, rand() % 128 + 128);
+        }
+        
+
 
         // Clear the screen at the beginning of each frame
-        clear(sf::Color(245, 245, 220)); 
+        clear(sf::Color(bcolor)); 
 
         //demo start
-        primitiveRenderer.drawCircle(sf::Vector2f(200, 200), 50, sf::Color::Red);
 
-        player.Update(deltaTime);
-        player.Draw(*this);
+        //primitiveRenderer
+        /* primitiveRenderer.drawCircle(sf::Vector2f(100, 100), 50, sf::Color(50, 150, 255));
+        primitiveRenderer.drawPolyline(sf::Vector2i(100,50), sf::Vector2i(56, 125), sf::Vector2i(144, 125), sf::Color(255, 192, 203));
+        primitiveRenderer.drawCircle(sf::Vector2f(700, 100), 50, sf::Color(255, 192, 203));
+        primitiveRenderer.drawPolyline(sf::Vector2i(656, 75), sf::Vector2i(744, 75), sf::Vector2i(700, 150), sf::Color(50, 150, 255));*/
+        primitiveRenderer.animatedCircle(sf::Vector2f(400, 300), 20.0f, 100.0f, 1.0f, sf::Color(173, 216, 230)); 
+        primitiveRenderer.animatedCircle(sf::Vector2f(150, 300), 20.0f, 100.0f, 1.0f, sf::Color(255, 182, 193)); 
+        primitiveRenderer.animatedCircle(sf::Vector2f(650, 300), 20.0f, 100.0f, 0.0f, sf::Color(144, 238, 144));
+
+        primitiveRenderer.animatedCircle(sf::Vector2f(400, 100), 20.0f, 100.0f, 0.0f, sf::Color(230, 230, 250)); 
+        primitiveRenderer.animatedCircle(sf::Vector2f(150, 100), 20.0f, 100.0f, 0.0f, sf::Color(240, 128, 128)); 
+        primitiveRenderer.animatedCircle(sf::Vector2f(650, 100), 20.0f, 100.0f, 0.0f, sf::Color(135, 206, 250)); 
+
+
+
+        
+
+        
 
         //border collion
         border1.GetCollider().CheckColision(player.getCollider(), 1.0f);
@@ -91,6 +116,9 @@ void Engine::run() {
        
         //demo end
 
+        //player
+        player.Update(deltaTime);
+        player.Draw(*this);
 
         display();
     }

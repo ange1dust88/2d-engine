@@ -12,7 +12,7 @@ set(SOURCES
     Animation.cpp
     Collider.cpp
     Platform.cpp
-
+    
 
     #Platform.cpp# Добавьте ваш файл реализации
 )
@@ -25,6 +25,7 @@ set(HEADERS
     Animation.h
     Collider.h
     Platform.h
+    
 
    
     

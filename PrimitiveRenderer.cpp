@@ -100,3 +100,29 @@ void PrimitiveRenderer::drawPolygon(const std::vector<sf::Vector2f>& points, sf:
     window->draw(closingLine, 2, sf::Lines);
 }
 
+
+void PrimitiveRenderer::animatedCircle(sf::Vector2f center, float initialRadius, float maxRadius, float animationSpeed, sf::Color color) {
+    const int numSegments = 100;
+    const float twoPi = 2.0 * pi;
+    float angleIncrement = twoPi / numSegments;
+
+    static float currentRadius = initialRadius;
+    static bool increasing = true;
+    if (increasing) {
+        currentRadius += animationSpeed;
+        if (currentRadius >= maxRadius) {
+            currentRadius = maxRadius;
+            increasing = false;
+        }
+    } else {
+        currentRadius -= animationSpeed;
+        if (currentRadius <= initialRadius) {
+            currentRadius = initialRadius;
+            increasing = true;
+        }
+    }
+    sf::CircleShape circle(currentRadius);
+    circle.setFillColor(color);
+    circle.setPosition(center - sf::Vector2f(currentRadius, currentRadius));
+    window->draw(circle);
+}
